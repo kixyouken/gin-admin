@@ -1,9 +1,19 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
 
 func Index(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "index",
+	c.HTML(http.StatusOK, "index", gin.H{
+		"title": "Main website",
+	})
+}
+
+func Read(c *gin.Context) {
+	c.HTML(http.StatusOK, "read", gin.H{
+		"title": "Main website",
 	})
 }
