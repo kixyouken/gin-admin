@@ -12,7 +12,7 @@ import (
 //	@param message
 func Successful(c *gin.Context, message string) {
 	c.JSON(http.StatusOK, gin.H{
-		"code":    http.StatusOK,
+		"code":    0,
 		"message": message,
 	})
 }
@@ -35,7 +35,7 @@ func Errorful(c *gin.Context, code int, message string) {
 //	@param data
 func Dataful(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusOK, gin.H{
-		"code":    http.StatusOK,
+		"code":    0,
 		"data":    data,
 		"message": "success",
 	})
@@ -48,7 +48,7 @@ func Dataful(c *gin.Context, data interface{}) {
 //	@param count
 func Pageful(c *gin.Context, data interface{}, count int) {
 	c.JSON(http.StatusOK, gin.H{
-		"code":    http.StatusOK,
+		"code":    0,
 		"data":    data,
 		"count":   count,
 		"message": "success",
