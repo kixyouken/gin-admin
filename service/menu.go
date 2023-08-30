@@ -13,7 +13,7 @@ type sMenuService struct{}
 var MenuService = sMenuService{}
 
 var (
-	modelList []model.MenuModel
+	modelMenuList []model.MenuModel
 	// modelInfo model.MenuModel
 	// paramList []param.MenuInfo
 	// paramInfo param.MenuInfo
@@ -57,11 +57,11 @@ func (s *sMenuService) MenuList(in []model.MenuModel) (out []param.MenuInfo) {
 //	@return error
 func (s *sMenuService) GetAllMenu(c *gin.Context) ([]model.MenuModel, error) {
 	db := database.InitMysql()
-	err = db.Unscoped().Order("`order`").Where("`show` = ?", 1).Find(&modelList).Error
+	err = db.Unscoped().Order("`order`").Where("`show` = ?", 1).Find(&modelMenuList).Error
 	if err != nil {
 		return nil, err
 	}
-	return modelList, nil
+	return modelMenuList, nil
 }
 
 // BuildTree 处理无限级菜单

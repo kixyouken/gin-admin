@@ -46,7 +46,7 @@ func Dataful(c *gin.Context, data interface{}) {
 //	@param c
 //	@param data
 //	@param count
-func Pageful(c *gin.Context, data interface{}, count int) {
+func Pageful(c *gin.Context, data interface{}, count int64) {
 	c.JSON(http.StatusOK, gin.H{
 		"code":    0,
 		"data":    data,
