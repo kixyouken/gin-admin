@@ -19,12 +19,11 @@ func GetRouter() *gin.Engine {
 	// 静态文件
 	router.Static("/assets", "./assets")
 
-	router.GET("", index.Index)
-
 	router.GET("user/data", users.Data)
 
 	router.Use(middleware.Menu())
 	router.GET("user", users.Index)
+	router.GET("", index.Index)
 
 	return router
 }
