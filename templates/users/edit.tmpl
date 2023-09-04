@@ -1,0 +1,500 @@
+{{ define "css" }}
+<style>
+    .layui-form-pane .layui-form-label {
+        width: 190px;
+    }
+
+    .layui-form-pane .layui-input-block {
+        margin-left: 190px;
+    }
+
+    .LAY-required-fields {
+        color: #ff5722;
+        font-weight: 700;
+    }
+
+    .LAY-border-style {
+        border: 1px solid #f2f2f2;
+    }
+</style>
+{{ end }}
+
+{{ define "content" }}
+
+<div class="layui-row layui-card">
+    <div class="layui-card-body">
+        <form class="layui-form layui-form-pane layui-col-space15" lay-filter="users-form">
+            <div class="layui-col-md4">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">会員ID</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="id" class="layui-input" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">作成日時</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="created_at" class="layui-input" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">更新日時</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="updated_at" class="layui-input" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="LAY-required-fields">*</i> 氏</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="family_name" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="LAY-required-fields">*</i> 名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="LAY-required-fields">*</i> メール</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="LAY-required-fields">*</i> 携帯電話番号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="mobile" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="LAY-required-fields">*</i> 生年月日</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="birthday" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="LAY-required-fields">*</i> 学校名</label>
+                    <div class="layui-input-block">
+                        <select name="master_university_id" lay-search="" id="master-university"
+                            lay-filter="master-university">
+                            <option value=""></option>
+                            <option value="0">-</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6" style="display: none;" id="university-name-opt">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">学校名（手入力）</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="university_name_opt" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="LAY-required-fields">*</i> 卒業年月</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="graduation" id="IFRAME-graduation-data" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">カナ_氏</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="kana_family_name" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">カナ_名</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="kana_name" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">パスワード</label>
+                    <div class="layui-input-block">
+                        <input type="password" name="password" class="layui-input">
+                    </div>
+                </div>
+            </div> -->
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">学部</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="faculty" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">学科</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="department" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">文理区分</label>
+                    <div class="layui-input-block LAY-border-style">
+                        <input type="radio" name="type" value="1" title="文系">
+                        <input type="radio" name="type" value="2" title="理系">
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">ステータス</label>
+                    <div class="layui-input-block">
+                        <select name="status" lay-search="">
+                            <option value=""></option>
+                            <option value="0">未入力</option>
+                            <option value="1">内定</option>
+                            <option value="2">重複</option>
+                            <option value="3">公務員</option>
+                            <option value="4">教職</option>
+                            <option value="5">既卒</option>
+                            <option value="6">卒年延長</option>
+                            <option value="7">留学</option>
+                            <option value="8">進学</option>
+                            <option value="9">ダミー登録</option>
+                            <option value="91">メールエラー</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">AP内定</label>
+                    <div class="layui-input-block LAY-border-style">
+                        <input type="checkbox" name="ap_informal_offer" title="ON|OFF" lay-skin="switch">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">内定先</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="prospective_destination" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属団体名</label>
+                    <div class="layui-input-block">
+                        <select name="master_organization_id" lay-search="" id="master-organization">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">所属団体名（手入力）</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="organization_name_opt" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">理系の研究分野マスタ</label>
+                    <div class="layui-input-block">
+                        <select name="master_science_id" lay-search="">
+                            <option value=""></option>
+                            <option value="江西">江西省</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">譲れない条件</label>
+                    <div class="layui-input-block LAY-border-style">
+                        <input type="checkbox" name="master_negotiate_id[]" title="默认">
+                        <input type="checkbox" name="master_negotiate_id[]" lay-text="选中" checked>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">業界マスタ</label>
+                    <div class="layui-input-block">
+                        <select name="master_industry_id" lay-search="">
+                            <option value=""></option>
+                            <option value="江西">江西省</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">職種マスタ</label>
+                    <div class="layui-input-block">
+                        <select name="master_job_id" lay-search="">
+                            <option value=""></option>
+                            <option value="江西">江西省</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">福利厚生マスタ</label>
+                    <div class="layui-input-block">
+                        <select name="master_welfare_id" lay-search="">
+                            <option value=""></option>
+                            <option value="江西">江西省</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">勤務地マスタ</label>
+                    <div class="layui-input-block">
+                        <select name="master_location_id" lay-search="">
+                            <option value=""></option>
+                            <option value="江西">江西省</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">企業規模マスタ</label>
+                    <div class="layui-input-block">
+                        <select name="master_scale_id" lay-search="">
+                            <option value=""></option>
+                            <option value="江西">江西省</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">郵便番号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="postal_code" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">現住所（県）</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="address_area" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">現住所（市区町村）</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="address_city" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">現住所（以下）</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="address" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">現住所（ビル・建物名）</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="address_building" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">自己PR</label>
+                    <div class="layui-input-block">
+                        <textarea name="self_pr" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">ガクチカ</label>
+                    <div class="layui-input-block">
+                        <textarea name="extracurricular" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">AP担当コメント</label>
+                    <div class="layui-input-block">
+                        <textarea name="ap_comment" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">AP備考</label>
+                    <div class="layui-input-block">
+                        <textarea name="ap_remark" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">配信停止フラグ</label>
+                    <div class="layui-input-block LAY-border-style">
+                        <input type="checkbox" name="unsubscribe" title="ON|OFF" lay-skin="switch">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">TELNGフラグ</label>
+                    <div class="layui-input-block LAY-border-style">
+                        <input type="checkbox" name="flag_telng" title="ON|OFF" lay-skin="switch">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">退会フラグ</label>
+                    <div class="layui-input-block LAY-border-style">
+                        <input type="checkbox" name="flag_withdrawal" title="ON|OFF" lay-skin="switch">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">退会日時</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="withdrawaled_at" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md6">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">削除</label>
+                    <div class="layui-input-block LAY-border-style">
+                        <input type="checkbox" name="deleted_at" title="ON|OFF" lay-skin="switch">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-btn-container layui-col-xs12">
+                <button class="layui-btn" lay-submit lay-filter="demo-search">保存</button>
+                <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{ end }}
+
+{{ define "js" }}
+<script>
+    // 获取所有参数
+    function getUrlParamAll() {
+        let queryString = window.location.search.slice(1);
+        let paramsArray = queryString.split("&");
+        let params = {};
+
+        paramsArray.forEach(param => {
+            let [key, value] = param.split("=");
+            params[key] = decodeURIComponent(value);
+        });
+
+        return params
+    }
+
+    var paramInfo = getUrlParamAll();
+    console.log(paramInfo);
+
+    layui.use(function () {
+        var $ = layui.$
+            , form = layui.form
+            , laydate = layui.laydate;
+
+        laydate.render({
+            elem: "#IFRAME-graduation-data"
+            , type: "month"
+        })
+
+        $.ajax({
+            url: "/user/detail/" + paramInfo.id
+            , type: "post"
+        })
+            .done(function (res) {
+                form.val("users-form", res.data);
+
+                $('input[name="graduation"]').val(res.data.graduation_year + "-" + res.data.graduation_month);
+
+                form.render();
+                console.log(res);
+            })
+
+        $.ajax({
+            url: "/university/data"
+        })
+            .done(function (res) {
+                let option = "";
+                res.data.map(data => {
+                    option += '<option value="' + data.id + '">' + data.name + '</option>';
+                })
+                $("#master-university").append(option);
+                $("#master-university").val(paramInfo.master_university_id);
+                form.render();
+            })
+
+        $.ajax({
+            url: "/organization/data"
+        })
+            .done(function (res) {
+                let option = "";
+                res.data.map(data => {
+                    option += '<option value="' + data.id + '">' + data.name + '</option>';
+                })
+                $("#master-organization").append(option);
+                $("#master-organization").val(paramInfo.master_organization_id);
+                form.render();
+            })
+
+        form.on('select(master-university)', function (obj) {
+            if (obj.value === '0') {
+                $("#university-name-opt").show();
+            } else {
+                $("#university-name-opt").hide();
+                $('input[name="university_name_opt"]').val("");
+            }
+        })
+    })
+
+</script>
+{{ end }}

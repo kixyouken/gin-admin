@@ -1,4 +1,4 @@
-package service
+package search
 
 import (
 	"encoding/json"
@@ -8,17 +8,11 @@ import (
 	"gorm.io/gorm"
 )
 
-type sSearchService struct{}
+type sUsersSearch struct{}
 
-var SearchService = sSearchService{}
+var UsersSearch = sUsersSearch{}
 
-// SearchUser 搜索用户
-//
-//	@receiver s
-//	@param search
-//	@return db
-//	@return func(db *gorm.DB) *gorm.DB
-func (s *sSearchService) SearchUser(search interface{}) func(db *gorm.DB) *gorm.DB {
+func (s *sUsersSearch) SearchUsers(search interface{}) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		body, _ := json.Marshal(search)
 		users := param.UsersSearch{}

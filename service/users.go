@@ -15,7 +15,7 @@ var UsersService = sUsersService{}
 
 var (
 	modelUsersList []model.UsersModel
-	// userInfo model.UsersModel
+	modelUsersInfo model.UsersModel
 )
 
 func (s *sUsersService) UsersInfo(in model.UsersModel) (out param.UsersInfo) {
@@ -111,4 +111,20 @@ func (s *sUsersService) GetAllUsers(c *gin.Context, search func(db *gorm.DB) *go
 //	@return int64
 func (s *sUsersService) GetCountUsers(c *gin.Context, search func(db *gorm.DB) *gorm.DB) int64 {
 	return BaseService.GetCountJoins(&modelUsersList, search, "MasterUniversity")
+}
+
+// GetByIDUsers 根据ID获取
+//
+//	@receiver s
+//	@param c
+//	@param id
+//	@return *model.UsersModel
+//	@return error
+func (s *sUsersService) GetByIDUsers(c *gin.Context, id uint) (*model.UsersModel, error) {
+	err := BaseService.GetByID(&modelUsersInfo, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &modelUsersInfo, nil
 }

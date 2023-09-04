@@ -106,6 +106,16 @@ func (s *sBaseService) GetDistinct(out interface{}, column interface{}) error {
 	return db.Distinct(column).Find(out).Error
 }
 
+// GetByID 根据ID获取
+//
+//	@receiver s
+//	@param out
+//	@param id
+//	@return error
+func (s *sBaseService) GetByID(out interface{}, id uint) error {
+	return db.Limit(1).Where("id = ?", id).Find(out).Error
+}
+
 // Paginate 分页条件
 //
 //	@receiver s

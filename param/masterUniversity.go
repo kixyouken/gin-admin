@@ -14,3 +14,6 @@ type MasterUniversityInfo struct {
 	UpdatedAt   string `json:"updated_at"`
 	DeletedAt   string `json:"deleted_at"`
 }
+
+type MasterUniversitySearch struct {
+}

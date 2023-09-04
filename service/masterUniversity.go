@@ -4,6 +4,9 @@ import (
 	"gin-admin/common/format"
 	"gin-admin/model"
 	"gin-admin/param"
+
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type sMasterUniversityService struct{}
@@ -59,5 +62,21 @@ func (s *sMasterUniversityService) GetMasterUniversityArea(column interface{}) (
 	if err != nil {
 		return nil, err
 	}
+	return modelUniversityList, nil
+}
+
+// GetAllUniversity 大学列表
+//
+//	@receiver s
+//	@param c
+//	@param search
+//	@return []model.MasterUniversityModel
+//	@return error
+func (s *sMasterUniversityService) GetAllUniversity(c *gin.Context, search func(db *gorm.DB) *gorm.DB) ([]model.MasterUniversityModel, error) {
+	err := BaseService.GetAll(&modelUniversityList, search)
+	if err != nil {
+		return nil, err
+	}
+
 	return modelUniversityList, nil
 }
