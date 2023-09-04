@@ -25,9 +25,9 @@ func Index(c *gin.Context) {
 }
 
 func Data(c *gin.Context) {
-	paramUsersInfo := param.UsersInfo{}
-	c.BindQuery(&paramUsersInfo)
-	search := service.SearchService.SearchUser(paramUsersInfo)
+	paramUsersSearch := param.UsersSearch{}
+	c.ShouldBind(&paramUsersSearch)
+	search := service.SearchService.SearchUser(paramUsersSearch)
 	count := service.UsersService.GetCountUsers(c, search)
 	if count > 0 {
 		modelUserList, err = service.UsersService.GetAllUsers(c, search, "")

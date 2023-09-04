@@ -96,6 +96,16 @@ func (s *sBaseService) GetCountJoins(out interface{}, search func(db *gorm.DB) *
 	return count
 }
 
+// GetDistinct 去重（Distinct）
+//
+//	@receiver s
+//	@param out
+//	@param column
+//	@return error
+func (s *sBaseService) GetDistinct(out interface{}, column interface{}) error {
+	return db.Distinct(column).Find(out).Error
+}
+
 // Paginate 分页条件
 //
 //	@receiver s

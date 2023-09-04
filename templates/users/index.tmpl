@@ -22,7 +22,7 @@
         <div class="layui-card">
             <!-- <div class="layui-card-header">标题</div> -->
             <div class="layui-card-body">
-                <form class="layui-form layui-row layui-col-space15">
+                <form class="layui-form layui-row layui-col-space15" action="javascript:void(0);">
                     <div class="layui-col-md3">
                         <div class="layui-input-wrap">
                             <div class="layui-input-prefix">
@@ -55,8 +55,8 @@
                             <div class="layui-input-prefix">
                                 大学名
                             </div>
-                            <input type="text" name="university_name_opt" value="" placeholder="请输入大学名"
-                                class="layui-input" lay-affix="clear">
+                            <input type="text" name="university_name" value="" placeholder="请输入大学名" class="layui-input"
+                                lay-affix="clear">
                         </div>
                     </div>
                     <div class="layui-col-md3">
@@ -103,24 +103,23 @@
                             <div class="layui-input-prefix">
                                 大学エリア
                             </div>
-                            <div class="layui-input-inline">
-                                <input type="checkbox" name="AAA" title="默认">
-                                <input type="checkbox" name="BBB" lay-text="选中" checked>
-                                <input type="checkbox" name="CCC" title="禁用" disabled>
-                                <input type="checkbox" name="DDD" title="半选" id="ID-checkbox-ind">
+                            <div class="layui-input-inline" id="university-area">
+
                             </div>
                         </div>
                     </div>
-                    <div class="layui-col-md3">
-                        <div class="layui-input-wrap">
+                    <div class="layui-col-md6">
+                        <div class="layui-input-wrap" style="border: 1px solid #f2f2f2; line-height: 34px;">
                             <div class="layui-input-prefix">
-                                ランク
+                                大学ランク
                             </div>
-                            <select name="">
-                                <option value=""></option>
-                                <option value="1">文系</option>
-                                <option value="2">理系</option>
-                            </select>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" name="rank_obj[]" value="1" title="A">
+                                <input type="checkbox" name="rank_obj[]" value="2" title="B">
+                                <input type="checkbox" name="rank_obj[]" value="3" title="C">
+                                <input type="checkbox" name="rank_obj[]" value="4" title="D">
+                                <input type="checkbox" name="rank_obj[]" value="5" title="E">
+                            </div>
                         </div>
                     </div>
                     <div class="layui-col-md3">
@@ -128,8 +127,8 @@
                             <div class="layui-input-prefix">
                                 卒業年度
                             </div>
-                            <input type="text" name="" id="graduation-date" placeholder="请选择卒業年度" class="layui-input"
-                                lay-affix="clear">
+                            <input type="text" name="graduation" id="graduation-date" placeholder="请选择卒業年度"
+                                class="layui-input" lay-affix="clear">
                         </div>
                     </div>
                     <div class="layui-col-md3">
@@ -137,20 +136,28 @@
                             <div class="layui-input-prefix">
                                 内定先
                             </div>
-                            <input type="text" name="" value="" placeholder="请输入内定先" class="layui-input"
-                                lay-affix="clear">
+                            <input type="text" name="prospective_destination" value="" placeholder="请输入内定先"
+                                class="layui-input" lay-affix="clear">
                         </div>
                     </div>
-                    <div class="layui-col-md3">
-                        <div class="layui-input-wrap">
+                    <div class="layui-col-md12">
+                        <div class="layui-input-wrap" style="border: 1px solid #f2f2f2; line-height: 34px;">
                             <div class="layui-input-prefix">
                                 ステータス
                             </div>
-                            <select name="">
-                                <option value=""></option>
-                                <option value="1">文系</option>
-                                <option value="2">理系</option>
-                            </select>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" name="status_obj[]" value="0" title="未入力">
+                                <input type="checkbox" name="status_obj[]" value="1" title="内定">
+                                <input type="checkbox" name="status_obj[]" value="2" title="重複">
+                                <input type="checkbox" name="status_obj[]" value="3" title="公務員">
+                                <input type="checkbox" name="status_obj[]" value="4" title="教職">
+                                <input type="checkbox" name="status_obj[]" value="5" title="既卒">
+                                <input type="checkbox" name="status_obj[]" value="6" title="卒年延長">
+                                <input type="checkbox" name="status_obj[]" value="7" title="留学">
+                                <input type="checkbox" name="status_obj[]" value="8" title="進学">
+                                <input type="checkbox" name="status_obj[]" value="9" title="ダミー登録">
+                                <input type="checkbox" name="status_obj[]" value="91" title="メールエラー">
+                            </div>
                         </div>
                     </div>
                     <div class="layui-col-md3">
@@ -158,16 +165,17 @@
                             <div class="layui-input-prefix">
                                 登録日
                             </div>
-                            <input type="text" name="" id="lastlogin-date" placeholder="请选择登録日" class="layui-input"
-                                lay-affix="clear">
+                            <input type="text" name="created_at" id="lastlogin-date" placeholder="请选择登録日"
+                                class="layui-input" lay-affix="clear">
                         </div>
                     </div>
                     <div class="layui-col-md12">
                         <div class="layui-input-wrap">
-                            <input type="checkbox" name="" title="メール配信停止を除く" lay-skin="tag">
-                            <input type="checkbox" name="" lay-text="TELNGを除く" lay-skin="tag">
-                            <input type="checkbox" name="" title="退会を除く" lay-skin="tag">
-                            <input type="checkbox" name="" title="AP内定を除く" lay-skin="tag">
+                            <input type="checkbox" name="unsubscribe" value="1" title="メール配信停止を除く" lay-skin="tag">
+                            <input type="checkbox" name="flag_telng" value="1" lay-text="TELNGを除く" lay-skin="tag">
+                            <input type="checkbox" name="flag_withdrawal" value="1" title="退会を除く" lay-skin="tag"
+                                checked>
+                            <input type="checkbox" name="ap_informal_offer" value="1" title="AP内定を除く" lay-skin="tag">
                         </div>
                     </div>
                     <div class="layui-btn-container layui-col-xs12">
@@ -192,7 +200,8 @@
 
 <script>
     layui.use(function () {
-        var table = layui.table
+        var $ = layui.$
+            , table = layui.table
             , form = layui.form
             , laydate = layui.laydate
 
@@ -210,6 +219,7 @@
         table.render({
             elem: "#users-table"
             , url: "/user/data"
+            , where: { flag_withdrawal: 1 }
             , cols: [[
                 { field: "id", title: "会員ID", width: 105 }
                 , {
@@ -262,7 +272,26 @@
 
         // 搜索提交
         form.on('submit(users-table-search)', function (data) {
-            var field = data.field; // 获得表单字段
+            // 获得表单字段
+            var field = data.field;
+            field.university_area = [];
+            $.each(field, function (key, value) {
+                if (key.indexOf("university_area_obj[") === 0 && key.slice(-1) === "]") {
+                    field.university_area.push(value);
+                }
+            });
+            field.rank = [];
+            $.each(field, function (key, value) {
+                if (key.indexOf("rank_obj[") === 0 && key.slice(-1) === "]") {
+                    field.rank.push(value);
+                }
+            });
+            field.status = [];
+            $.each(field, function (key, value) {
+                if (key.indexOf("status_obj[") === 0 && key.slice(-1) === "]") {
+                    field.status.push(value);
+                }
+            });
             // 执行搜索重载
             table.reload('users-table', {
                 page: {
@@ -275,6 +304,18 @@
             // 阻止默认 form 跳转
             return false;
         });
+
+        $.ajax({
+            url: "/university/area"
+        })
+            .done(function (res) {
+                let checkbox = "";
+                res.data.map(data => {
+                    checkbox += '<input type="checkbox" name="university_area_obj[]" value="' + data.area + '" title="' + data.area + '">';
+                });
+                $("#university-area").html(checkbox);
+                form.render();
+            })
     });
 </script>
 {{ end }}

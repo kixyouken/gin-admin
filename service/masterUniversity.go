@@ -10,6 +10,15 @@ type sMasterUniversityService struct{}
 
 var MasterUniversityService = sMasterUniversityService{}
 
+var (
+	modelUniversityList []model.MasterUniversityModel
+)
+
+// MasterUniversityInfo 大学详情
+//
+//	@receiver s
+//	@param in
+//	@return out
 func (s *sMasterUniversityService) MasterUniversityInfo(in model.MasterUniversityModel) (out param.MasterUniversityInfo) {
 	out.ID = in.ID
 	out.Name = in.Name
@@ -25,6 +34,11 @@ func (s *sMasterUniversityService) MasterUniversityInfo(in model.MasterUniversit
 	return out
 }
 
+// MasterUniversityList 大学列表
+//
+//	@receiver s
+//	@param in
+//	@return out
 func (s *sMasterUniversityService) MasterUniversityList(in []model.MasterUniversityModel) (out []param.MasterUniversityInfo) {
 	for _, v := range in {
 		info := s.MasterUniversityInfo(v)
@@ -32,4 +46,18 @@ func (s *sMasterUniversityService) MasterUniversityList(in []model.MasterUnivers
 	}
 
 	return out
+}
+
+// GetMasterUniversityArea 大学地区
+//
+//	@receiver s
+//	@param column
+//	@return []model.MasterUniversityModel
+//	@return error
+func (s *sMasterUniversityService) GetMasterUniversityArea(column interface{}) ([]model.MasterUniversityModel, error) {
+	err := BaseService.GetDistinct(&modelUniversityList, column)
+	if err != nil {
+		return nil, err
+	}
+	return modelUniversityList, nil
 }

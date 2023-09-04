@@ -1,23 +1,24 @@
 package param
 
+// UsersInfo 详情
 type UsersInfo struct {
-	ID                     uint                 `json:"id" form:"id"`
-	Email                  string               `json:"email" form:"email"`
+	ID                     uint                 `json:"id"`
+	Email                  string               `json:"email"`
 	Password               string               `json:"password"`
 	FamilyName             string               `json:"family_name"`
-	Name                   string               `json:"name" form:"name"`
+	Name                   string               `json:"name"`
 	KanaFamilyName         string               `json:"kana_family_name"`
-	KanaName               string               `json:"kana_name" form:"kana_name"`
+	KanaName               string               `json:"kana_name"`
 	Birthday               string               `json:"birthday"`
 	UniversityNameSort     int                  `json:"university_name_sort"`
 	MasterUniversityID     uint                 `json:"master_university_id"`
-	UniversityNameOpt      string               `json:"university_name_opt" form:"university_name_opt"`
-	Faculty                string               `json:"faculty" form:"faculty"`
+	UniversityNameOpt      string               `json:"university_name_opt"`
+	Faculty                string               `json:"faculty"`
 	Department             string               `json:"department"`
-	Type                   int                  `json:"type" form:"type"`
+	Type                   int                  `json:"type"`
 	GraduationYear         int                  `json:"graduation_year"`
 	GraduationMonth        int                  `json:"graduation_month"`
-	Mobile                 string               `json:"mobile" form:"mobile"`
+	Mobile                 string               `json:"mobile"`
 	PostalCode             string               `json:"postal_code"`
 	AddressArea            string               `json:"address_area"`
 	AddressCity            string               `json:"address_city"`
@@ -52,4 +53,26 @@ type UsersInfo struct {
 	UpdatedAt              string               `json:"updated_at"`
 	DeletedAt              string               `json:"deleted_at"`
 	MasterUniversity       MasterUniversityInfo `json:"master_university"`
+}
+
+// UsersSearch 搜索
+type UsersSearch struct {
+	ID                     uint     `form:"id"`
+	Name                   string   `form:"name"`
+	KanaName               string   `form:"kana_name"`
+	UniversityName         string   `form:"university_name"`
+	Mobile                 string   `form:"mobile"`
+	Email                  string   `form:"email"`
+	Faculty                string   `form:"faculty"`
+	Type                   int      `form:"type"`
+	UniversityArea         []string `form:"university_area[]"`
+	Rank                   []string `form:"rank[]"`
+	Graduation             string   `form:"graduation"`
+	ProspectiveDestination string   `form:"prospective_destination"`
+	Status                 []string `form:"status[]"`
+	CreatedAt              string   `form:"created_at"`
+	Unsubscribe            string   `form:"unsubscribe"`
+	FlagTelng              string   `form:"flag_telng"`
+	FlagWithdrawal         string   `form:"flag_withdrawal"`
+	ApInformalOffer        string   `form:"ap_informal_offer"`
 }
