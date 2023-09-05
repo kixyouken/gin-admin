@@ -242,9 +242,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">業界マスタ</label>
                     <div class="layui-input-block">
-                        <select name="master_industry_id" lay-search="">
+                        <select name="master_industry_id" lay-search="" id="master-industry">
                             <option value=""></option>
-                            <option value="江西">江西省</option>
                         </select>
                     </div>
                 </div>
@@ -516,6 +515,21 @@
                     negotiate_checkbox["master_negotiate_id[" + negotiate_ids[i] + "]"] = true;
                 }
                 form.val("users-form", negotiate_checkbox);
+                form.render();
+            })
+
+        $.ajax({
+            url: "/industry/data"
+        })
+            .done(function (res) {
+                let option = "";
+                res.data.map(data => {
+                    option += '<option value="' + data.id + '">' + data.name + '</option>';
+                })
+                $("#master-industry").append(option);
+                form.val("users-form", {
+                    "master_industry_id": paramInfo.master_industry_id
+                });
                 form.render();
             })
 
