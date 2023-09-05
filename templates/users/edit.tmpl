@@ -232,11 +232,9 @@
                 </div>
             </div>
             <div class="layui-col-md12">
-                <div class="layui-form-item">
+                <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">譲れない条件</label>
-                    <div class="layui-input-block LAY-border-style">
-                        <input type="checkbox" name="master_negotiate_id[]" title="默认">
-                        <input type="checkbox" name="master_negotiate_id[]" lay-text="选中" checked>
+                    <div class="layui-input-block LAY-border-style" id="master-negotiate" style="border-top: 0;">
                     </div>
                 </div>
             </div>
@@ -454,7 +452,6 @@
                 form.val("users-form", res.data);
 
                 $('input[name="graduation"]').val(res.data.graduation_year + "-" + res.data.graduation_month);
-
                 form.render();
                 console.log(res);
             })
@@ -468,7 +465,9 @@
                     option += '<option value="' + data.id + '">' + data.name + '</option>';
                 })
                 $("#master-university").append(option);
-                $("#master-university").val(paramInfo.master_university_id);
+                form.val("users-form", {
+                    "master_university_id": paramInfo.master_university_id
+                });
                 form.render();
             })
 
@@ -481,7 +480,9 @@
                     option += '<option value="' + data.id + '">' + data.name + '</option>';
                 })
                 $("#master-organization").append(option);
-                $("#master-organization").val(paramInfo.master_organization_id);
+                form.val("users-form", {
+                    "master_organization_id": paramInfo.master_organization_id
+                });
                 form.render();
             })
 
@@ -494,7 +495,27 @@
                     option += '<option value="' + data.id + '">' + data.research_areas + '</option>';
                 })
                 $("#master-science").append(option);
-                $("#master-science").val(paramInfo.master_science_id);
+                form.val("users-form", {
+                    "master_science_id": paramInfo.master_science_id
+                });
+                form.render();
+            })
+
+        $.ajax({
+            url: "/negotiate/data"
+        })
+            .done(function (res) {
+                let input = "";
+                res.data.map(data => {
+                    input += '<input type="checkbox" name="master_negotiate_id[' + data.id + ']" value="' + data.id + '" title="' + data.name + '">';
+                })
+                $("#master-negotiate").append(input);
+                let negotiate_ids = paramInfo.master_negotiate_id.split(",");
+                let negotiate_checkbox = {};
+                for (let i = 0; i < negotiate_ids.length; i++) {
+                    negotiate_checkbox["master_negotiate_id[" + negotiate_ids[i] + "]"] = true;
+                }
+                form.val("users-form", negotiate_checkbox);
                 form.render();
             })
 
