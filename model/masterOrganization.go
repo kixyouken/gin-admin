@@ -5,7 +5,7 @@ import "gorm.io/gorm"
 type MasterOrganizationModel struct {
 	gorm.Model
 	Name     string
-	FlagShow string
+	FlagShow int
 }
 
 func (MasterOrganizationModel) TableName() string {

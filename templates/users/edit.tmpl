@@ -225,9 +225,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">理系の研究分野マスタ</label>
                     <div class="layui-input-block">
-                        <select name="master_science_id" lay-search="">
+                        <select name="master_science_id" lay-search="" id="master-science">
                             <option value=""></option>
-                            <option value="江西">江西省</option>
                         </select>
                     </div>
                 </div>
@@ -483,6 +482,19 @@
                 })
                 $("#master-organization").append(option);
                 $("#master-organization").val(paramInfo.master_organization_id);
+                form.render();
+            })
+
+        $.ajax({
+            url: "/science/data"
+        })
+            .done(function (res) {
+                let option = "";
+                res.data.map(data => {
+                    option += '<option value="' + data.id + '">' + data.research_areas + '</option>';
+                })
+                $("#master-science").append(option);
+                $("#master-science").val(paramInfo.master_science_id);
                 form.render();
             })
 

@@ -3,6 +3,7 @@ package router
 import (
 	"gin-admin/controller/index"
 	"gin-admin/controller/master/organization"
+	"gin-admin/controller/master/science"
 	"gin-admin/controller/master/university"
 	"gin-admin/controller/users"
 	"gin-admin/middleware"
@@ -28,6 +29,7 @@ func GetRouter() *gin.Engine {
 	router.GET("university/area", university.Area)
 	router.GET("university/data", university.Data)
 	router.GET("organization/data", organization.Data)
+	router.GET("science/data", science.Data)
 
 	router.Use(middleware.Menu())
 	router.GET("user", users.Index)
