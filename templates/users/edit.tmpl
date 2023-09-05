@@ -252,9 +252,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">職種マスタ</label>
                     <div class="layui-input-block">
-                        <select name="master_job_id" lay-search="">
+                        <select name="master_job_id" lay-search="" id="master-job">
                             <option value=""></option>
-                            <option value="江西">江西省</option>
                         </select>
                     </div>
                 </div>
@@ -529,6 +528,21 @@
                 $("#master-industry").append(option);
                 form.val("users-form", {
                     "master_industry_id": paramInfo.master_industry_id
+                });
+                form.render();
+            })
+
+        $.ajax({
+            url: "/job/data"
+        })
+            .done(function (res) {
+                let option = "";
+                res.data.map(data => {
+                    option += '<option value="' + data.id + '">' + data.name + '</option>';
+                })
+                $("#master-job").append(option);
+                form.val("users-form", {
+                    "master_job_id": paramInfo.master_job_id
                 });
                 form.render();
             })
