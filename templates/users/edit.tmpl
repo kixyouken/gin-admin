@@ -262,9 +262,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">福利厚生マスタ</label>
                     <div class="layui-input-block">
-                        <select name="master_welfare_id" lay-search="">
+                        <select name="master_welfare_id" lay-search="" id="master-welfare">
                             <option value=""></option>
-                            <option value="江西">江西省</option>
                         </select>
                     </div>
                 </div>
@@ -543,6 +542,21 @@
                 $("#master-job").append(option);
                 form.val("users-form", {
                     "master_job_id": paramInfo.master_job_id
+                });
+                form.render();
+            })
+
+        $.ajax({
+            url: "/welfare/data"
+        })
+            .done(function (res) {
+                let option = "";
+                res.data.map(data => {
+                    option += '<option value="' + data.id + '">' + data.name + '</option>';
+                })
+                $("#master-welfare").append(option);
+                form.val("users-form", {
+                    "master_welfare_id": paramInfo.master_welfare_id
                 });
                 form.render();
             })
