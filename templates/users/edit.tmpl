@@ -272,9 +272,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">勤務地マスタ</label>
                     <div class="layui-input-block">
-                        <select name="master_location_id" lay-search="">
+                        <select name="master_location_id" lay-search="" id="master-location">
                             <option value=""></option>
-                            <option value="江西">江西省</option>
                         </select>
                     </div>
                 </div>
@@ -560,6 +559,34 @@
                 });
                 form.render();
             })
+
+        let location_parent = [1, 3, 12, 21, 29, 35, 43, 54];
+        let location_child = [
+            [2, 2], [4, 11], [13, 20], [22, 28], [30, 34], [36, 42], [44, 53], [55, 63]
+        ];
+        for (let i = 0; i < location_parent.length; i++) {
+            $.ajax({
+                url: "/location/detail/" + location_parent[i]
+            })
+                .done(function (res) {
+                    $.ajax({
+                        url: "/location/data"
+                        , data: { child_id: location_child[i] }
+                    })
+                        .done(function (r) {
+                            let option = "";
+                            r.data.map(data => {
+                                option += '<option value="' + data.id + '">' + data.name + '</option>';
+                            })
+                            let optgroup = '<optgroup label="' + res.data.name + '">' + option + '</optgroup>';
+                            $("#master-location").append(optgroup);
+                            form.val("users-form", {
+                                "master_location_id": paramInfo.master_location_id
+                            });
+                            form.render();
+                        })
+                })
+        }
 
         form.on('select(master-university)', function (obj) {
             if (obj.value === '0') {

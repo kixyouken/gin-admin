@@ -4,6 +4,7 @@ import (
 	"gin-admin/controller/index"
 	"gin-admin/controller/master/industry"
 	"gin-admin/controller/master/job"
+	"gin-admin/controller/master/location"
 	"gin-admin/controller/master/negotiate"
 	"gin-admin/controller/master/organization"
 	"gin-admin/controller/master/science"
@@ -38,6 +39,8 @@ func GetRouter() *gin.Engine {
 	router.GET("industry/data", industry.Data)
 	router.GET("job/data", job.Data)
 	router.GET("welfare/data", welfare.Data)
+	router.GET("location/data", location.Data)
+	router.GET("location/detail/:id", location.Detail)
 
 	router.Use(middleware.Menu())
 	router.GET("user", users.Index)
