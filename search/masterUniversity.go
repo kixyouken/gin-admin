@@ -1,4 +1,4 @@
-package master
+package search
 
 import "gorm.io/gorm"
 

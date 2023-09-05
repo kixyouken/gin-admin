@@ -4,7 +4,7 @@ import (
 	"gin-admin/common/output"
 	"gin-admin/model"
 	"gin-admin/param"
-	"gin-admin/search/master"
+	"gin-admin/search"
 	"gin-admin/service"
 
 	"github.com/gin-gonic/gin"
@@ -19,8 +19,8 @@ var (
 func Data(c *gin.Context) {
 	paramOrganizationSearch := param.MasterOrganizationSearch{}
 	c.ShouldBind(&paramOrganizationSearch)
-	search := master.OrganizationSearch.SearchOrganization(&paramOrganizationSearch)
-	modelOrganizationList, err = service.MasterOrganizationService.GetAllOrganization(c, search)
+	searchDB := search.OrganizationSearch.SearchOrganization(&paramOrganizationSearch)
+	modelOrganizationList, err = service.MasterOrganizationService.GetAllOrganization(c, searchDB)
 	if err != nil {
 		return
 	}

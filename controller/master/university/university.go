@@ -4,7 +4,7 @@ import (
 	"gin-admin/common/output"
 	"gin-admin/model"
 	"gin-admin/param"
-	"gin-admin/search/master"
+	"gin-admin/search"
 	"gin-admin/service"
 
 	"github.com/gin-gonic/gin"
@@ -32,8 +32,8 @@ func Area(c *gin.Context) {
 func Data(c *gin.Context) {
 	paramUniversitySearch := param.MasterUniversitySearch{}
 	c.ShouldBind(&paramUniversitySearch)
-	search := master.UniversitySearch.SearchUniversity(paramUniversitySearch)
-	modelUniversityList, err = service.MasterUniversityService.GetAllUniversity(c, search)
+	searchDB := search.UniversitySearch.SearchUniversity(paramUniversitySearch)
+	modelUniversityList, err = service.MasterUniversityService.GetAllUniversity(c, searchDB)
 	if err != nil {
 		return
 	}
