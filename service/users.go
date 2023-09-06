@@ -15,7 +15,6 @@ var UsersService = sUsersService{}
 
 var (
 	modelUsersList []model.UsersModel
-	modelUsersInfo model.UsersModel
 )
 
 func (s *sUsersService) UsersInfo(in model.UsersModel) (out param.UsersInfo) {
@@ -70,7 +69,9 @@ func (s *sUsersService) UsersInfo(in model.UsersModel) (out param.UsersInfo) {
 	out.WithdrawalBy = in.WithdrawalBy
 	out.CreatedAt = in.CreatedAt.Format(format.YMDHI)
 	out.UpdatedAt = in.UpdatedAt.Format(format.YMDHI)
-	out.DeletedAt = in.DeletedAt.Time.Format(format.YMDHI)
+	if !in.DeletedAt.Time.IsZero() {
+		out.DeletedAt = in.DeletedAt.Time.Format(format.YMDHI)
+	}
 
 	out.MasterUniversity = MasterUniversityService.MasterUniversityInfo(in.MasterUniversity)
 
@@ -121,6 +122,7 @@ func (s *sUsersService) GetCountUsers(c *gin.Context, search func(db *gorm.DB) *
 //	@return *model.UsersModel
 //	@return error
 func (s *sUsersService) GetByIDUsers(c *gin.Context, id uint) (*model.UsersModel, error) {
+	modelUsersInfo := model.UsersModel{}
 	err := BaseService.GetByID(&modelUsersInfo, id)
 	if err != nil {
 		return nil, err

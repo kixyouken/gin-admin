@@ -14,10 +14,6 @@ var MenuService = sMenuService{}
 
 var (
 	modelMenuList []model.MenuModel
-	// modelInfo model.MenuModel
-	// paramList []param.MenuInfo
-	// paramInfo param.MenuInfo
-	err error
 )
 
 // MenuInfo 详情
@@ -57,7 +53,7 @@ func (s *sMenuService) MenuList(in []model.MenuModel) (out []param.MenuInfo) {
 //	@return error
 func (s *sMenuService) GetAllMenu(c *gin.Context) ([]model.MenuModel, error) {
 	db := database.InitMysql()
-	err = db.Unscoped().Order("`order`").Where("`show` = ?", 1).Find(&modelMenuList).Error
+	err := db.Unscoped().Order("`order`").Where("`show` = ?", 1).Find(&modelMenuList).Error
 	if err != nil {
 		return nil, err
 	}

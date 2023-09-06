@@ -1,7 +1,6 @@
 package location
 
 import (
-	"fmt"
 	"gin-admin/common/convert"
 	"gin-admin/common/output"
 	"gin-admin/model"
@@ -21,7 +20,6 @@ var (
 func Data(c *gin.Context) {
 	paramLocationSearch := param.MasterLocationSearch{}
 	c.ShouldBind(&paramLocationSearch)
-	fmt.Println(paramLocationSearch)
 	searchDB := search.LocationSearch.SearchLocation(paramLocationSearch)
 	modelLocationList, err = service.MasterLocationService.GetAllLocation(c, searchDB)
 	if err != nil {

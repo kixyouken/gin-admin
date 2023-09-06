@@ -23,8 +23,9 @@ func (s *sMasterJobService) JobInfo(in model.MasterJobModel) (out param.MasterJo
 	out.FlagShow = in.FlagShow
 	out.CreatedAt = in.CreatedAt.Format(format.YMDHI)
 	out.UpdatedAt = in.UpdatedAt.Format(format.YMDHI)
-	out.DeletedAt = in.DeletedAt.Time.Format(format.YMDHI)
-
+	if !in.DeletedAt.Time.IsZero() {
+		out.DeletedAt = in.DeletedAt.Time.Format(format.YMDHI)
+	}
 	return out
 }
 

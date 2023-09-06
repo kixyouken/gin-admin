@@ -34,6 +34,7 @@ func (s *sMasterUniversityService) MasterUniversityInfo(in model.MasterUniversit
 	out.FlagShow = in.FlagShow
 	out.CreatedAt = in.CreatedAt.Format(format.YMDHI)
 	out.UpdatedAt = in.UpdatedAt.Format(format.YMDHI)
+
 	return out
 }
 
