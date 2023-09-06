@@ -123,7 +123,7 @@ func (s *sUsersService) GetCountUsers(c *gin.Context, search func(db *gorm.DB) *
 //	@return error
 func (s *sUsersService) GetByIDUsers(c *gin.Context, id uint) (*model.UsersModel, error) {
 	modelUsersInfo := model.UsersModel{}
-	err := BaseService.GetByID(&modelUsersInfo, id)
+	err := BaseService.GetByIDUnscoped(&modelUsersInfo, id)
 	if err != nil {
 		return nil, err
 	}

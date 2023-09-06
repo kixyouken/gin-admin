@@ -73,6 +73,7 @@ func (s *sUsersSearch) SearchUsers(search interface{}) func(db *gorm.DB) *gorm.D
 		if users.ApInformalOffer != "" {
 			db.Where("`ap_informal_offer` NOT IN (?) OR `ap_informal_offer` IS NULL", users.ApInformalOffer)
 		}
+		db.Unscoped()
 		return db
 	}
 }
