@@ -74,6 +74,13 @@ func (s *sUsersService) UsersInfo(in model.UsersModel) (out param.UsersInfo) {
 	}
 
 	out.MasterUniversity = MasterUniversityService.MasterUniversityInfo(in.MasterUniversity)
+	out.MasterOrganization = MasterOrganizationService.OrganizationInfo(in.MasterOrganization)
+	out.MasterScience = MasterScienceService.ScienceInfo(in.MasterScience)
+	out.MasterIndustry = MasterIndustryService.IndustryInfo(in.MasterIndustry)
+	out.MasterJob = MasterJobService.JobInfo(in.MasterJob)
+	out.MasterWelfare = MasterWelfareService.WelfareInfo(in.MasterWelfare)
+	out.MasterLocation = MasterLocationService.LocationInfo(in.MasterLocation)
+	out.MasterScale = MasterScaleService.ScaleInfo(in.MasterScale)
 
 	return out
 }
@@ -85,6 +92,58 @@ func (s *sUsersService) UsersList(in []model.UsersModel) (out []param.UsersInfo)
 	}
 
 	return out
+}
+
+func (s *sUsersService) GetUsersString(in param.UsersInfo) param.UsersInfo {
+	switch in.Type {
+	case 1:
+		in.TypeText = "文科"
+	case 2:
+		in.TypeText = "理科"
+	}
+
+	switch in.Status {
+	case 0:
+		in.StatusText = "未入力"
+	case 1:
+		in.StatusText = "内定"
+	case 2:
+		in.StatusText = "重複"
+	case 3:
+		in.StatusText = "公務員"
+	case 4:
+		in.StatusText = "教職"
+	case 5:
+		in.StatusText = "既卒"
+	case 6:
+		in.StatusText = "卒年延長"
+	case 7:
+		in.StatusText = "留学"
+	case 8:
+		in.StatusText = "進学"
+	case 9:
+		in.StatusText = "ダミー登録"
+	case 91:
+		in.StatusText = "メールエラー"
+	}
+
+	if in.ApInformalOffer == "1" {
+		in.ApInformalOfferText = "ON"
+	}
+
+	if in.Unsubscribe == 1 {
+		in.UnsubscribeText = "ON"
+	}
+
+	if in.FlagTelng == 1 {
+		in.FlagTelngText = "ON"
+	}
+
+	if in.FlagWithdrawal == 1 {
+		in.FlagWithdrawalText = "ON"
+	}
+
+	return in
 }
 
 // GetAllUser 分页查询
@@ -123,7 +182,7 @@ func (s *sUsersService) GetCountUsers(c *gin.Context, search func(db *gorm.DB) *
 //	@return error
 func (s *sUsersService) GetByIDUsers(c *gin.Context, id uint) (*model.UsersModel, error) {
 	modelUsersInfo := model.UsersModel{}
-	err := BaseService.GetByIDUnscoped(&modelUsersInfo, id)
+	err := BaseService.GetByIDUnscoped(&modelUsersInfo, id, "MasterUniversity", "MasterOrganization", "MasterScience", "MasterIndustry", "MasterJob", "MasterWelfare", "MasterLocation", "MasterScale")
 	if err != nil {
 		return nil, err
 	}

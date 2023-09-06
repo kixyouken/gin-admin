@@ -10,4 +10,5 @@ type MasterNegotiateInfo struct {
 }
 
 type MasterNegotiateSearch struct {
+	ID string `form:"id"`
 }

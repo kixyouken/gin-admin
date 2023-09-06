@@ -194,6 +194,7 @@
 {{ define "js" }}
 <script type="text/html" id="users-tool">
     <div class="layui-clear-space">
+        <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="view">查看</a>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     </div>
 </script>
@@ -265,7 +266,7 @@
                 }
                 , { field: "withdrawaled_at", title: "退会", width: 150 }
                 , { field: "created_at", title: "作成日時", width: 150 }
-                , { toolbar: "#users-tool", title: "操作" }
+                , { toolbar: "#users-tool", title: "操作", width: 110 }
             ]]
             , page: true
         });
@@ -274,8 +275,23 @@
             let data = obj.data;
 
             switch (obj.event) {
+                case "view":
+                    let viewObj = {
+                        id: data.id
+                        , master_negotiate_id: data.master_negotiate_id
+                    }
+                    let viewStr = $.param(viewObj);
+                    layer.open({
+                        type: 2,
+                        title: '编辑',
+                        shadeClose: true,
+                        maxmin: true, // 开启最大化最小化按钮
+                        area: ['1200px', '600px'],
+                        content: "/user/view?" + viewStr
+                    });
+                    break;
                 case 'edit':
-                    let paramObj = {
+                    let editObj = {
                         id: data.id
                         , master_university_id: data.master_university_id
                         , master_organization_id: data.master_organization_id
@@ -287,14 +303,14 @@
                         , master_location_id: data.master_location_id
                         , master_scale_id: data.master_scale_id
                     }
-                    let paramStr = $.param(paramObj);
+                    let editStr = $.param(editObj);
                     layer.open({
                         type: 2,
                         title: '编辑',
                         shadeClose: true,
                         maxmin: true, // 开启最大化最小化按钮
                         area: ['1200px', '600px'],
-                        content: "/user/edit?" + paramStr
+                        content: "/user/edit?" + editStr
                     });
                     break;
 

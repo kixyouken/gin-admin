@@ -55,7 +55,14 @@ type UsersModel struct {
 	OrganizationNameOpt    string
 	WithdrawalBy           int
 	MasterUniversityName   string
-	MasterUniversity       MasterUniversityModel `gorm:"foreignKey:ID;references:MasterUniversityID"`
+	MasterUniversity       MasterUniversityModel   `gorm:"foreignKey:ID;references:MasterUniversityID"`
+	MasterOrganization     MasterOrganizationModel `gorm:"foreignKey:ID;references:MasterOrganizationID"`
+	MasterScience          MasterScienceModel      `gorm:"foreignKey:ID;references:MasterScienceID"`
+	MasterIndustry         MasterIndustryModel     `gorm:"foreignKey:ID;references:MasterIndustryID"`
+	MasterJob              MasterJobModel          `gorm:"foreignKey:ID;references:MasterJobID"`
+	MasterWelfare          MasterWelfareModel      `gorm:"foreignKey:ID;references:MasterWelfareID"`
+	MasterLocation         MasterLocationModel     `gorm:"foreignKey:ID;references:MasterLocationID"`
+	MasterScale            MasterScaleModel        `gorm:"foreignKey:ID;references:MasterScaleID"`
 }
 
 func (UsersModel) TableName() string {

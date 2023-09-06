@@ -122,8 +122,8 @@ func (s *sBaseService) GetByID(out interface{}, id uint) error {
 //	@param out
 //	@param id
 //	@return error
-func (s *sBaseService) GetByIDUnscoped(out interface{}, id uint) error {
-	return db.Unscoped().Limit(1).Where("id = ?", id).Find(out).Error
+func (s *sBaseService) GetByIDUnscoped(out interface{}, id uint, preload ...string) error {
+	return db.Scopes(s.Preload(preload...)).Unscoped().Limit(1).Where("id = ?", id).Find(out).Error
 }
 
 // Paginate 分页条件

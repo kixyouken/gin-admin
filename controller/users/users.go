@@ -49,8 +49,8 @@ func Data(c *gin.Context) {
 	output.Pageful(c, paramUsersList, count)
 }
 
-func Read(c *gin.Context) {
-	c.HTML(http.StatusOK, "users/read", gin.H{
+func View(c *gin.Context) {
+	c.HTML(http.StatusOK, "users/view", gin.H{
 		"title": "Main website",
 	})
 }
@@ -68,5 +68,16 @@ func Detail(c *gin.Context) {
 		return
 	}
 	info := service.UsersService.UsersInfo(*modelUsersInfo)
+	output.Dataful(c, info)
+}
+
+func Read(c *gin.Context) {
+	id := convert.GetUint(c, "id")
+	modelUsersInfo, err := service.UsersService.GetByIDUsers(c, id)
+	if err != nil {
+		return
+	}
+	info := service.UsersService.UsersInfo(*modelUsersInfo)
+	info = service.UsersService.GetUsersString(info)
 	output.Dataful(c, info)
 }

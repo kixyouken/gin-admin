@@ -1,0 +1,416 @@
+{{ define "css" }}
+<style>
+    .layui-input-prefix {
+        width: 180px;
+        padding: 0;
+    }
+
+    .layui-input-wrap .layui-input {
+        padding-left: 180px !important;
+    }
+
+    .layui-input-inline {
+        padding-left: 100px;
+    }
+</style>
+{{ end }}
+
+{{ define "content" }}
+<div class="layui-row layui-card">
+    <div class="layui-card-body">
+        <form class="layui-form layui-form-pane layui-col-space15" lay-filter="users-form">
+            <blockquote class="layui-elem-quote">
+                個人情報
+            </blockquote>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        会員ID
+                    </div>
+                    <input type="text" name="id" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        氏名
+                    </div>
+                    <input type="text" name="full_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        フリガナ
+                    </div>
+                    <input type="text" name="furigana_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        メール
+                    </div>
+                    <input type="text" name="email" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        携帯電話番号
+                    </div>
+                    <input type="text" name="mobile" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        生年月日
+                    </div>
+                    <input type="text" name="birthday" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        郵便番号
+                    </div>
+                    <input type="text" name="postal_code" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        現住所（県）
+                    </div>
+                    <input type="text" name="address_area" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        現住所（市区町村）
+                    </div>
+                    <input type="text" name="address_city" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        現住所（以下）
+                    </div>
+                    <input type="text" name="address" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        現住所（ビル・建物名）
+                    </div>
+                    <input type="text" name="address_building" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        自己PR
+                    </div>
+                    <input type="text" name="self_pr" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        ガクチカ
+                    </div>
+                    <input type="text" name="extracurricular" value="" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <hr>
+            <blockquote class="layui-elem-quote">
+                大学情報
+            </blockquote>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        学校名
+                    </div>
+                    <input type="text" name="university_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        学部
+                    </div>
+                    <input type="text" name="faculty" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        学科
+                    </div>
+                    <input type="text" name="department" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        文理区分
+                    </div>
+                    <input type="text" name="type_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        卒業年月
+                    </div>
+                    <input type="text" name="graduation" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        ステータス
+                    </div>
+                    <input type="text" name="status_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        AP内定
+                    </div>
+                    <input type="text" name="ap_informal_offer_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        内定先
+                    </div>
+                    <input type="text" name="prospective_destination" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        所属団体名
+                    </div>
+                    <input type="text" name="master_organization_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        所属団体名（手入力）
+                    </div>
+                    <input type="text" name="organization_name_opt" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        理系の研究分野
+                    </div>
+                    <input type="text" name="master_science_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        譲れない条件
+                    </div>
+                    <input type="text" name="master_negotiate_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        業界
+                    </div>
+                    <input type="text" name="master_industry_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        職種
+                    </div>
+                    <input type="text" name="master_job_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        福利厚生
+                    </div>
+                    <input type="text" name="master_welfare_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        勤務地
+                    </div>
+                    <input type="text" name="master_location_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        企業規模
+                    </div>
+                    <input type="text" name="master_scale_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <hr>
+            <blockquote class="layui-elem-quote">
+                AP管理項目
+            </blockquote>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        AP担当コメント
+                    </div>
+                    <input type="text" name="ap_comment" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        AP備考
+                    </div>
+                    <input type="text" name="ap_remark" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        AP内定
+                    </div>
+                    <input type="text" name="ap_informal_offer_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+
+            <hr>
+            <blockquote class="layui-elem-quote">
+                データ情報
+            </blockquote>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        配信停止フラグ
+                    </div>
+                    <input type="text" name="unsubscribe_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        TELNGフラグ
+                    </div>
+                    <input type="text" name="flag_telng_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        退会フラグ
+                    </div>
+                    <input type="text" name="flag_withdrawal_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        退会日時
+                    </div>
+                    <input type="text" name="withdrawaled_at" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        削除
+                    </div>
+                    <input type="text" name="deleted_at" value="" class="layui-input" disabled>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{{ end }}
+
+{{ define "js" }}
+<script>
+    // 获取所有参数
+    function getUrlParamAll() {
+        let queryString = window.location.search.slice(1);
+        let paramsArray = queryString.split("&");
+        let params = {};
+
+        paramsArray.forEach(param => {
+            let [key, value] = param.split("=");
+            params[key] = decodeURIComponent(value);
+        });
+
+        return params
+    }
+
+    var paramInfo = getUrlParamAll();
+    if (paramInfo.master_negotiate_id == undefined || !paramInfo.master_negotiate_id) {
+        paramInfo.master_negotiate_id = 0;
+    }
+
+    layui.use(function () {
+        var $ = layui.$
+            , form = layui.form;
+
+        $.ajax({
+            url: "/negotiate/data"
+            , data: { id: paramInfo.master_negotiate_id }
+        })
+            .done(function (res) {
+                let negotiate_name = [];
+                if (res.data) {
+                    res.data.map(data => {
+                        negotiate_name.push(data.name);
+                    })
+                }
+                form.val("users-form", {
+                    "master_negotiate_name": negotiate_name.join(",")
+                });
+            })
+
+        $.ajax({
+            url: "/user/read/" + paramInfo.id
+            , type: "post"
+        })
+            .done(function (res) {
+                res.data.full_name = res.data.family_name + " " + res.data.name;
+                res.data.furigana_name = res.data.kana_family_name + " " + res.data.kana_name;
+                res.data.university_name = res.data.master_university ? res.data.master_university.name : res.data.university_name_opt;
+                res.data.graduation = res.data.graduation_year + "年" + res.data.graduation_month + "月";
+                res.data.master_organization_name = res.data.master_organization ? res.data.master_organization.name : "";
+                res.data.master_science_name = res.data.master_science ? res.data.master_science.research_areas : "";
+                res.data.master_industry_name = res.data.master_industry ? res.data.master_industry.name : "";
+                res.data.master_job_name = res.data.master_job ? res.data.master_job.name : "";
+                res.data.master_welfare_name = res.data.master_welfare ? res.data.master_welfare.name : "";
+                res.data.master_location_name = res.data.master_location ? res.data.master_location.name : "";
+                res.data.master_scale_name = res.data.master_scale ? res.data.master_scale.name : "";
+
+                form.val("users-form", res.data);
+
+                // $('input[name="graduation"]').val(res.data.graduation_year + "-" + res.data.graduation_month);
+                form.render();
+                console.log(res);
+            })
+
+    })
+</script>
+{{ end }}

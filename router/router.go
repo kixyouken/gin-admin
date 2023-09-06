@@ -28,9 +28,15 @@ func GetRouter() *gin.Engine {
 	// 静态文件
 	router.Static("/assets", "./assets")
 
+	// 用户列表
 	router.GET("user/data", users.Data)
-	router.GET("user/read", users.Read)
+	// 用户详情页面
+	router.GET("user/view", users.View)
+	// 用户详情页面数据
+	router.POST("user/read/:id", users.Read)
+	// 用户编辑页面
 	router.GET("user/edit", users.Edit)
+	// 用户编辑页面数据
 	router.POST("user/detail/:id", users.Detail)
 	router.GET("university/area", university.Area)
 	router.GET("university/data", university.Data)
@@ -56,5 +62,6 @@ func createRender() multitemplate.Renderer {
 	tmpl.AddFromFiles("index", "templates/base/layout.tmpl", "templates/index/index.tmpl")
 	tmpl.AddFromFiles("users/index", "templates/base/layout.tmpl", "templates/users/index.tmpl")
 	tmpl.AddFromFiles("users/edit", "templates/base/iframe.tmpl", "templates/users/edit.tmpl")
+	tmpl.AddFromFiles("users/view", "templates/base/iframe.tmpl", "templates/users/view.tmpl")
 	return tmpl
 }
