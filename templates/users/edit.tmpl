@@ -282,9 +282,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">企業規模マスタ</label>
                     <div class="layui-input-block">
-                        <select name="master_scale_id" lay-search="">
+                        <select name="master_scale_id" lay-search="" id="master-scale">
                             <option value=""></option>
-                            <option value="江西">江西省</option>
                         </select>
                     </div>
                 </div>
@@ -587,6 +586,21 @@
                         })
                 })
         }
+
+        $.ajax({
+            url: "/scale/data"
+        })
+            .done(function (res) {
+                let option = "";
+                res.data.map(data => {
+                    option += '<option value="' + data.id + '">' + data.name + '</option>';
+                })
+                $("#master-scale").append(option);
+                form.val("users-form", {
+                    "master_scale_id": paramInfo.master_scale_id
+                });
+                form.render();
+            })
 
         form.on('select(master-university)', function (obj) {
             if (obj.value === '0') {

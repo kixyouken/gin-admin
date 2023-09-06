@@ -10,6 +10,7 @@ import (
 	"gin-admin/controller/master/science"
 	"gin-admin/controller/master/university"
 	"gin-admin/controller/master/welfare"
+	"gin-admin/controller/scale"
 	"gin-admin/controller/users"
 	"gin-admin/middleware"
 
@@ -41,6 +42,7 @@ func GetRouter() *gin.Engine {
 	router.GET("welfare/data", welfare.Data)
 	router.GET("location/data", location.Data)
 	router.GET("location/detail/:id", location.Detail)
+	router.GET("scale/data", scale.Data)
 
 	router.Use(middleware.Menu())
 	router.GET("user", users.Index)
