@@ -1,6 +1,7 @@
 package router
 
 import (
+	"gin-admin/controller/call"
 	"gin-admin/controller/index"
 	"gin-admin/controller/master/industry"
 	"gin-admin/controller/master/job"
@@ -52,9 +53,12 @@ func GetRouter() *gin.Engine {
 	router.GET("location/detail/:id", location.Detail)
 	router.GET("scale/data", scale.Data)
 
+	router.GET("/menu", index.Menu)
+
 	router.Use(middleware.Menu())
-	router.GET("user", users.Index)
 	router.GET("", index.Index)
+	router.GET("user", users.Index)
+	router.GET("call/list", call.Index)
 
 	return router
 }
@@ -65,5 +69,6 @@ func createRender() multitemplate.Renderer {
 	tmpl.AddFromFiles("users/index", "templates/base/layout.tmpl", "templates/users/index.tmpl")
 	tmpl.AddFromFiles("users/edit", "templates/base/iframe.tmpl", "templates/users/edit.tmpl")
 	tmpl.AddFromFiles("users/view", "templates/base/iframe.tmpl", "templates/users/view.tmpl")
+	tmpl.AddFromFiles("call/index", "templates/base/layout.tmpl", "templates/call/index.tmpl")
 	return tmpl
 }
