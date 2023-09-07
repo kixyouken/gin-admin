@@ -81,3 +81,12 @@ func Read(c *gin.Context) {
 	info = service.UsersService.GetUsersString(info)
 	output.Dataful(c, info)
 }
+
+func Update(c *gin.Context) {
+	id := convert.GetUint(c, "id")
+	paramUsersInfo := param.UsersInfo{}
+	c.ShouldBind(&paramUsersInfo)
+	column := []string{"family_name", "name", "email", "mobile", "birthday", "master_university_id", "university_name_opt", "graduation_year", "graduation_month", "kana_family_name", "kana_name", "faculty", "department", "type", "status", "ap_informal_offer", "prospective_destination", "master_organization_id", "organization_name_opt", "master_science_id", "master_negotiate_id", "master_industry_id", "master_job_id", "master_welfare_id", "master_location_id", "master_scale_id", "postal_code", "address_area", "address_city", "address", "address_building", "self_pr", "extracurricular", "ap_comment", "ap_remark", "unsubscribe", "flag_telng", "flag_withdrawal"}
+	service.UsersService.SetByIDUsers(c, id, paramUsersInfo, column)
+	output.Successful(c, "success")
+}

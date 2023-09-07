@@ -126,6 +126,18 @@ func (s *sBaseService) GetByIDUnscoped(out interface{}, id uint, preload ...stri
 	return db.Scopes(s.Preload(preload...)).Unscoped().Limit(1).Where("id = ?", id).Find(out).Error
 }
 
+// UpdateByID 根据ID更新
+//
+//	@receiver s
+//	@param model
+//	@param id
+//	@param updates
+//	@param column
+//	@return error
+func (s *sBaseService) UpdateByID(model interface{}, id uint, updates interface{}, column interface{}) error {
+	return db.Model(model).Select(column).Where("id = ?", id).Updates(updates).Error
+}
+
 // Paginate 分页条件
 //
 //	@receiver s

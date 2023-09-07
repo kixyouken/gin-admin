@@ -189,3 +189,22 @@ func (s *sUsersService) GetByIDUsers(c *gin.Context, id uint) (*model.UsersModel
 
 	return &modelUsersInfo, nil
 }
+
+// SetByIDUsers 根据ID更新
+//
+//	@receiver s
+//	@param c
+//	@param id
+//	@param updates
+//	@param column
+//	@return *model.UsersModel
+//	@return error
+func (s *sUsersService) SetByIDUsers(c *gin.Context, id uint, updates interface{}, column interface{}) (*model.UsersModel, error) {
+	modelUsersInfo := model.UsersModel{}
+	err := BaseService.UpdateByID(&modelUsersInfo, id, updates, column)
+	if err != nil {
+		return nil, err
+	}
+
+	return &modelUsersInfo, nil
+}

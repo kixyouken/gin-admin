@@ -38,6 +38,8 @@ func GetRouter() *gin.Engine {
 	router.GET("user/edit", users.Edit)
 	// 用户编辑页面数据
 	router.POST("user/detail/:id", users.Detail)
+	// 用户更新信息
+	router.PUT("user/update/:id", users.Update)
 	router.GET("university/area", university.Area)
 	router.GET("university/data", university.Data)
 	router.GET("organization/data", organization.Data)
