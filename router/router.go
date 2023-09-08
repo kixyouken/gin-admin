@@ -3,6 +3,7 @@ package router
 import (
 	"gin-admin/controller/call"
 	"gin-admin/controller/index"
+	"gin-admin/controller/mail/delivery"
 	"gin-admin/controller/master/industry"
 	"gin-admin/controller/master/job"
 	"gin-admin/controller/master/location"
@@ -61,6 +62,8 @@ func GetRouter() *gin.Engine {
 	router.PUT("call/update/:id", call.Update)
 	// コールリスト用户列表
 	router.GET("call/users", call.Users)
+	// メール配信一覧数据
+	router.GET("delivery/data", delivery.Data)
 
 	router.GET("/menu", index.Menu)
 
@@ -68,6 +71,7 @@ func GetRouter() *gin.Engine {
 	router.GET("", index.Index)
 	router.GET("user", users.Index)
 	router.GET("call/list", call.Index)
+	router.GET("mailer/delivery", delivery.Index)
 
 	return router
 }
@@ -81,5 +85,6 @@ func createRender() multitemplate.Renderer {
 	tmpl.AddFromFiles("call/index", "templates/base/layout.tmpl", "templates/call/index.tmpl")
 	tmpl.AddFromFiles("call/edit", "templates/base/iframe.tmpl", "templates/call/edit.tmpl")
 	tmpl.AddFromFiles("call/users", "templates/base/iframe.tmpl", "templates/call/users.tmpl")
+	tmpl.AddFromFiles("delivery/index", "templates/base/layout.tmpl", "templates/delivery/index.tmpl")
 	return tmpl
 }

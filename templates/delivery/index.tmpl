@@ -1,0 +1,40 @@
+{{ define "css" }}
+<style>
+
+</style>
+{{ end }}
+
+{{ define "content" }}
+
+<div class="layui-row layui-card">
+    <div class="layui-card-body">
+        <table class="layui-hide" id="delivery-table" lay-filter="delivery-table"></table>
+    </div>
+</div>
+
+{{ end }}
+
+{{ define "js" }}
+<script>
+    layui.use(function () {
+        var $ = layui.$
+            , table = layui.table;
+
+        table.render({
+            elem: "#delivery-table"
+            , url: "/delivery/data"
+            , where: {}
+            , cols: [[
+                { field: "id", title: "番号", width: 105 }
+                , { field: "name", title: "管理名称" }
+                , { field: "", title: "送信済/全数" }
+                , { field: "", title: "対象者リスト" }
+                , { field: "send_at", title: "送信日時" }
+                , { field: "send_completed_at", title: "送信完了日時" }
+                , { field: "status", title: "実施ステータス" }
+            ]]
+            , page: true
+        });
+    })
+</script>
+{{ end }}
