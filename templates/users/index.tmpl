@@ -320,9 +320,9 @@
         })
 
         // 搜索提交
-        form.on('submit(users-table-search)', function (data) {
+        form.on('submit(users-table-search)', function (obj) {
             // 获得表单字段
-            var field = data.field;
+            var field = obj.field;
             field.university_area = [];
             $.each(field, function (key, value) {
                 if (key.indexOf("university_area_obj[") === 0 && key.slice(-1) === "]") {
@@ -342,7 +342,7 @@
                 }
             });
             // 执行搜索重载
-            table.reload('users-table', {
+            table.reloadData('users-table', {
                 page: {
                     // 重新从第 1 页开始
                     curr: 1

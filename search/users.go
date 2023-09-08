@@ -18,7 +18,7 @@ func (s *sUsersSearch) SearchUsers(search interface{}) func(db *gorm.DB) *gorm.D
 		users := param.UsersSearch{}
 		json.Unmarshal(body, &users)
 		if users.ID > 0 {
-			db.Where("id = ?", users.ID)
+			db.Where("`users`.`id` = ?", users.ID)
 		}
 		if users.Name != "" {
 			db.Where("`name` LIKE ? OR `family_name` LIKE ?", "%"+users.Name+"%", "%"+users.Name+"%")

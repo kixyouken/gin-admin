@@ -1,14 +1,39 @@
 {{ define "css" }}
+<style>
+    .layui-input-prefix {
+        width: 100px;
+        padding: 0;
+    }
+
+    .layui-input-wrap .layui-input {
+        padding-left: 100px !important;
+    }
+</style>
 {{ end }}
 
 {{ define "content" }}
 
 <div class="layui-row layui-col-space15">
-    <div class="layui-col-md6">
+    <div class="layui-col-md12">
         <div class="layui-card">
-            <div class="layui-card-header">标题</div>
+            <!-- <div class="layui-card-header">标题</div> -->
             <div class="layui-card-body">
-                call
+                <form class="layui-form layui-row layui-col-space15" action="javascript:void(0);">
+                    <div class="layui-col-md3">
+                        <div class="layui-input-wrap">
+                            <div class="layui-input-prefix">
+                                コールリスト
+                            </div>
+                            <input type="text" name="name" value="" placeholder="请输入コールリスト" class="layui-input"
+                                lay-affix="clear">
+                        </div>
+                    </div>
+                    <div class="layui-btn-container layui-col-xs12">
+                        <button class="layui-btn" lay-submit lay-filter="call-table-search">Search</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">Clear</button>
+                    </div>
+                </form>
+                <table class="layui-hide" id="call-table" lay-filter="call-table"></table>
             </div>
         </div>
     </div>
@@ -17,4 +42,83 @@
 {{ end }}
 
 {{ define "js" }}
+<script type="text/html" id="call-tool">
+    <div class="layui-clear-space">
+        <!-- <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="view">查看</a> -->
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    </div>
+</script>
+
+<script>
+    layui.use(function () {
+        var $ = layui.$
+            , table = layui.table
+            , form = layui.form;
+
+        table.render({
+            elem: "#call-table"
+            , url: "/call/data"
+            , cols: [[
+                { field: "id", title: "番号", width: 105 }
+                , { field: "name", title: "コールリスト名称" }
+                , { field: "", title: "コール対象数" }
+                , {
+                    field: "", title: "ステータス", templet: function (d) {
+                        switch (d.status) {
+                            case 1:
+                                return '<button class="layui-btn layui-btn-xs">実施中</button>';
+                                break;
+                            case 9:
+                                return '<button class="layui-btn layui-bg-red layui-btn-xs">停止終了</button>';
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                , { field: "created_at", title: "作成日時" }
+                , { field: "updated_at", title: "更新日時" }
+                , { toolbar: "#call-tool", title: "操作", width: 110 }
+            ]]
+            , page: true
+        })
+
+        table.on("tool(call-table)", function (obj) {
+            let data = obj.data;
+
+            switch (obj.event) {
+                case "edit":
+                    let editStr = $.param(data);
+                    layer.open({
+                        type: 2,
+                        title: '编辑',
+                        shadeClose: true,
+                        maxmin: true, // 开启最大化最小化按钮
+                        area: ['800px', '650px'],
+                        content: "/call/edit?" + editStr
+                    });
+                    break;
+
+                default:
+                    break;
+            }
+        })
+
+        form.on("submit(call-table-search)", function (obj) {
+            // 获得表单字段
+            var field = obj.field;
+            // 执行搜索重载
+            table.reloadData('call-table', {
+                page: {
+                    // 重新从第 1 页开始
+                    curr: 1
+                },
+                // 搜索的字段
+                where: field
+            });
+            // 阻止默认 form 跳转
+            return false;
+        })
+    })
+</script>
 {{ end }}

@@ -53,6 +53,13 @@ func GetRouter() *gin.Engine {
 	router.GET("location/detail/:id", location.Detail)
 	router.GET("scale/data", scale.Data)
 
+	// コールリスト数据
+	router.GET("call/data", call.Data)
+	// コールリスト编辑页面
+	router.GET("call/edit", call.Edit)
+	// コールリスト执行更新
+	router.PUT("call/update/:id", call.Update)
+
 	router.GET("/menu", index.Menu)
 
 	router.Use(middleware.Menu())
@@ -70,5 +77,6 @@ func createRender() multitemplate.Renderer {
 	tmpl.AddFromFiles("users/edit", "templates/base/iframe.tmpl", "templates/users/edit.tmpl")
 	tmpl.AddFromFiles("users/view", "templates/base/iframe.tmpl", "templates/users/view.tmpl")
 	tmpl.AddFromFiles("call/index", "templates/base/layout.tmpl", "templates/call/index.tmpl")
+	tmpl.AddFromFiles("call/edit", "templates/base/iframe.tmpl", "templates/call/edit.tmpl")
 	return tmpl
 }

@@ -1,0 +1,122 @@
+{{ define "css" }}
+<style>
+    .layui-form-item {
+        margin-bottom: 0;
+    }
+
+    .layui-form-pane .layui-form-label {
+        width: 190px;
+    }
+
+    .layui-form-pane .layui-input-block {
+        margin-left: 190px;
+    }
+
+    .LAY-border-style {
+        border: 1px solid #f2f2f2;
+    }
+</style>
+{{ end }}
+
+{{ define "content" }}
+
+<div class="layui-row layui-card">
+    <div class="layui-card-body">
+        <form class="layui-form layui-form-pane layui-col-space15" lay-filter="call-form">
+            <div class="layui-col-md12">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">番号</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="id" class="layui-input" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">コールリスト名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">ステータス</label>
+                    <div class="layui-input-block LAY-border-style">
+                        <input type="radio" name="status" value="1" title="実施中">
+                        <input type="radio" name="status" value="9" title="停止終了">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">詳細内容</label>
+                    <div class="layui-input-block">
+                        <textarea name="detail" placeholder="请输入詳細内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">備考</label>
+                    <div class="layui-input-block">
+                        <textarea name="remark" placeholder="请输入備考" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-btn-container layui-col-xs12">
+                <button class="layui-btn" lay-submit lay-filter="call-save">保存</button>
+                <button type="reset" class="layui-btn layui-btn-primary">Reset</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{{ end }}
+
+{{ define "js" }}
+<script>
+    // 获取所有参数
+    function getUrlParamAll() {
+        let queryString = window.location.search.slice(1);
+        let paramsArray = queryString.split("&");
+        let params = {};
+
+        paramsArray.forEach(param => {
+            let [key, value] = param.split("=");
+            params[key] = decodeURIComponent(value);
+        });
+
+        return params
+    }
+
+    var paramInfo = getUrlParamAll();
+    console.log(paramInfo);
+
+    layui.use(function () {
+        var $ = layui.$
+            , form = layui.form;
+
+        form.val("call-form", paramInfo);
+
+        form.on("submit(call-save)", function (obj) {
+            $.ajax({
+                url: "/call/update/" + paramInfo.id
+                , type: "put"
+                , data: obj.field
+            })
+                .done(function (res) {
+                    layer.msg(res.message, {}, function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                        parent.layui.table.reloadData("call-table");
+                    })
+                    console.log(res);
+                })
+            console.log(obj);
+            return false;
+        })
+
+    })
+</script>
+{{ end }}
