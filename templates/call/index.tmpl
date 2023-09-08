@@ -46,6 +46,7 @@
     <div class="layui-clear-space">
         <!-- <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="view">查看</a> -->
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="users-view">対象一覧</a>
     </div>
 </script>
 
@@ -61,7 +62,11 @@
             , cols: [[
                 { field: "id", title: "番号", width: 105 }
                 , { field: "name", title: "コールリスト名称" }
-                , { field: "", title: "コール対象数" }
+                , {
+                    field: "", title: "コール対象数", templet: function (d) {
+                        return d.call_targets.length;
+                    }
+                }
                 , {
                     field: "", title: "ステータス", templet: function (d) {
                         switch (d.status) {
@@ -78,7 +83,7 @@
                 }
                 , { field: "created_at", title: "作成日時" }
                 , { field: "updated_at", title: "更新日時" }
-                , { toolbar: "#call-tool", title: "操作", width: 110 }
+                , { toolbar: "#call-tool", title: "操作", width: 130 }
             ]]
             , page: true
         })
@@ -98,7 +103,20 @@
                         content: "/call/edit?" + editStr
                     });
                     break;
-
+                case "users-view":
+                    let usersIds = [];
+                    data.call_targets.map(res => {
+                        usersIds.push(res.user_id);
+                    })
+                    layer.open({
+                        type: 2,
+                        title: '编辑',
+                        shadeClose: true,
+                        maxmin: true, // 开启最大化最小化按钮
+                        area: ['1200px', '630px'],
+                        content: "/call/users?user_ids=" + usersIds
+                    });
+                    break;
                 default:
                     break;
             }

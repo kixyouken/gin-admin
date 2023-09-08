@@ -33,6 +33,12 @@ func Edit(c *gin.Context) {
 	})
 }
 
+func Users(c *gin.Context) {
+	c.HTML(http.StatusOK, "call/users", gin.H{
+		"title": "Main website",
+	})
+}
+
 func Data(c *gin.Context) {
 	paramCallSearch := param.CallSearch{}
 	c.ShouldBind(&paramCallSearch)

@@ -73,6 +73,10 @@ func (s *sUsersSearch) SearchUsers(search interface{}) func(db *gorm.DB) *gorm.D
 		if users.ApInformalOffer != "" {
 			db.Where("`ap_informal_offer` NOT IN (?) OR `ap_informal_offer` IS NULL", users.ApInformalOffer)
 		}
+		if users.CallUserID != "" {
+			userID := strings.Split(users.CallUserID, ",")
+			db.Where("`users`.`id` IN ?", userID)
+		}
 		db.Unscoped()
 		return db
 	}

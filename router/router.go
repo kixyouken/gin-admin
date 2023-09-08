@@ -59,6 +59,8 @@ func GetRouter() *gin.Engine {
 	router.GET("call/edit", call.Edit)
 	// コールリスト执行更新
 	router.PUT("call/update/:id", call.Update)
+	// コールリスト用户列表
+	router.GET("call/users", call.Users)
 
 	router.GET("/menu", index.Menu)
 
@@ -78,5 +80,6 @@ func createRender() multitemplate.Renderer {
 	tmpl.AddFromFiles("users/view", "templates/base/iframe.tmpl", "templates/users/view.tmpl")
 	tmpl.AddFromFiles("call/index", "templates/base/layout.tmpl", "templates/call/index.tmpl")
 	tmpl.AddFromFiles("call/edit", "templates/base/iframe.tmpl", "templates/call/edit.tmpl")
+	tmpl.AddFromFiles("call/users", "templates/base/iframe.tmpl", "templates/call/users.tmpl")
 	return tmpl
 }

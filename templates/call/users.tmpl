@@ -1,0 +1,76 @@
+{{ define "css" }}
+<style>
+
+</style>
+{{ end }}
+
+{{ define "content" }}
+
+<div class="layui-row layui-card">
+    <div class="layui-card-body">
+        <table class="layui-hide" id="users-table" lay-filter="users-table"></table>
+    </div>
+</div>
+
+{{ end }}
+
+{{ define "js" }}
+<script>
+    // 获取所有参数
+    function getUrlParamAll() {
+        let queryString = window.location.search.slice(1);
+        let paramsArray = queryString.split("&");
+        let params = {};
+
+        paramsArray.forEach(param => {
+            let [key, value] = param.split("=");
+            params[key] = decodeURIComponent(value);
+        });
+
+        return params
+    }
+
+    var paramInfo = getUrlParamAll();
+    console.log(paramInfo);
+
+    layui.use(function () {
+        var $ = layui.$
+            , table = layui.table;
+
+        table.render({
+            elem: "#users-table"
+            , url: "/user/data"
+            , where: { call_user_id: paramInfo.user_ids }
+            , cols: [[
+                { field: "id", title: "会員ID", width: 105 }
+                , {
+                    field: "", title: "氏名", templet: function (d) {
+                        return d.family_name + " " + d.name
+                    }
+                }
+                , {
+                    field: "", title: "フリガナ", templet: function (d) {
+                        return d.kana_family_name + " " + d.kana_name
+                    }
+                }
+                , { field: "mobile", title: "携帯電話番号" }
+                , { field: "email", title: "メール", width: 180 }
+                , {
+                    field: "", title: "学校名", templet: function (d) {
+                        if (d.master_university) {
+                            return d.master_university.name
+                        }
+                        return d.university_name_opt
+                    }, width: 180
+                }
+                , {
+                    field: "", title: "卒業年度", templet: function (d) {
+                        return d.graduation_year + "年" + d.graduation_month + "月"
+                    }, width: 110
+                }
+            ]]
+            , page: true
+        });
+    })
+</script>
+{{ end }}

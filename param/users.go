@@ -88,4 +88,5 @@ type UsersSearch struct {
 	FlagTelng              string   `form:"flag_telng"`
 	FlagWithdrawal         string   `form:"flag_withdrawal"`
 	ApInformalOffer        string   `form:"ap_informal_offer"`
+	CallUserID             string   `form:"call_user_id"`
 }

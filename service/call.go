@@ -32,6 +32,8 @@ func (s *sCallService) CallInfo(in model.CallModel) (out param.CallInfo) {
 		out.DeletedAt = in.DeletedAt.Time.Format(format.YMDHI)
 	}
 
+	out.CallTargets = CallTargetsService.CallTargetsList(in.CallTargets)
+
 	return out
 }
 
@@ -45,7 +47,7 @@ func (s *sCallService) CallList(in []model.CallModel) (out []param.CallInfo) {
 }
 
 func (s *sCallService) GetAllCall(c *gin.Context, search func(db *gorm.DB) *gorm.DB, order string) ([]model.CallModel, error) {
-	err := BaseService.GetPage(c, &modelCallList, search, "*", order)
+	err := BaseService.GetPagePreload(c, &modelCallList, search, "*", order, "CallTargets")
 	if err != nil {
 		return nil, err
 	}
