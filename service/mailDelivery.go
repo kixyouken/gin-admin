@@ -55,7 +55,7 @@ func (s *sMailDeliveryService) DeliveryList(in []model.MailDeliveryModel) (out [
 }
 
 func (s *sMailDeliveryService) GetAllDelivery(c *gin.Context, search func(db *gorm.DB) *gorm.DB, order string) ([]model.MailDeliveryModel, error) {
-	err := BaseService.GetPagePreload(c, &modelDeliveryList, search, "*", order, "MailDeliveryLogs")
+	err := BaseService.GetPagePreload(c, &modelDeliveryList, search, "*", order, "MailDeliveryLogs.Unscoped")
 	if err != nil {
 		return nil, err
 	}

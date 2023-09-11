@@ -8,7 +8,6 @@ var DeliverySearch = sDeliverySearch{}
 
 func (s *sDeliverySearch) SearchDelivery(search interface{}) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-		db.Unscoped()
 		return db
 	}
 }

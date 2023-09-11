@@ -3,6 +3,7 @@ package service
 import (
 	"gin-admin/database"
 	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -189,7 +190,18 @@ func (s *sBaseService) Preload(preload ...string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		for _, v := range preload {
 			if v != "" {
-				db.Preload(v)
+				// 使用strings.Contains()检查字符串是否包含"."符号
+				if strings.Contains(v, ".") {
+					preloads := strings.Split(v, ".")
+					switch preloads[1] {
+					case "Unscoped":
+						db.Preload(preloads[0], func(db *gorm.DB) *gorm.DB {
+							return db.Unscoped()
+						})
+					}
+				} else {
+					db.Preload(v)
+				}
 			}
 		}
 		return db
