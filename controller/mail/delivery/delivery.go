@@ -1,6 +1,7 @@
 package delivery
 
 import (
+	"gin-admin/common/convert"
 	"gin-admin/common/output"
 	"gin-admin/model"
 	"gin-admin/param"
@@ -26,6 +27,12 @@ func Index(c *gin.Context) {
 	})
 }
 
+func View(c *gin.Context) {
+	c.HTML(http.StatusOK, "delivery/view", gin.H{
+		"title": "Main website",
+	})
+}
+
 func Data(c *gin.Context) {
 	paramMailDeliverySearch := param.MailDeliverySearch{}
 	c.ShouldBind(&paramMailDeliverySearch)
@@ -43,4 +50,14 @@ func Data(c *gin.Context) {
 	}
 
 	output.Pageful(c, paramDeliveryList, count)
+}
+
+func Read(c *gin.Context) {
+	id := convert.GetUint(c, "id")
+	modelDeliveryInfo, err := service.MailDeliveryService.GetByIDDelivery(c, id)
+	if err != nil {
+		return
+	}
+	paramDeliveryInfo := service.MailDeliveryService.DeliveryInfo(*modelDeliveryInfo)
+	output.Dataful(c, paramDeliveryInfo)
 }

@@ -29,9 +29,22 @@ func (s *sMailDeliveryService) DeliveryInfo(in model.MailDeliveryModel) (out par
 	out.Content = in.Content
 	out.MasterSignID = in.MasterSignID
 	out.Status = in.Status
+	if in.Status == 1 {
+		out.StatusText = "配信完了"
+	} else {
+		out.StatusText = "未実施"
+	}
 	out.MailContentConfirm = in.MailContentConfirm
 	out.MailAddressConfirm = in.MailAddressConfirm
 	out.SummaryCategory = in.SummaryCategory
+	switch in.SummaryCategory {
+	case 0:
+		out.SummaryCategoryText = "-"
+	case 1:
+		out.SummaryCategoryText = "ジョブオファー"
+	case 2:
+		out.SummaryCategoryText = "イベント"
+	}
 	out.MailConfirmBy = in.MailConfirmBy
 	out.MailConfirmAt = in.MailConfirmAt.Format(format.YMDHI)
 	out.CreatedAt = in.CreatedAt.Format(format.YMDHI)
@@ -42,6 +55,8 @@ func (s *sMailDeliveryService) DeliveryInfo(in model.MailDeliveryModel) (out par
 
 	out.MailDeliveryLogs = MailDeliveryLogsService.MailDeliveryLogsList(in.MailDeliveryLogs)
 	out.MailDeliveryTargets = MailDeliveryTargetsService.DeliveryTargetsList(in.MailDeliveryTargets)
+	out.MailSenders = MailSendersService.SendersInfo(in.MailSenders)
+	out.MasterSign = MasterSignService.SignInfo(in.MasterSign)
 
 	return out
 }
@@ -66,4 +81,14 @@ func (s *sMailDeliveryService) GetAllDelivery(c *gin.Context, search func(db *go
 
 func (s *sMailDeliveryService) GetCountDelivery(c *gin.Context, search func(db *gorm.DB) *gorm.DB) int64 {
 	return BaseService.GetCount(&modelDeliveryList, search)
+}
+
+func (s *sMailDeliveryService) GetByIDDelivery(c *gin.Context, id uint) (*model.MailDeliveryModel, error) {
+	modelDeliveryInfo := model.MailDeliveryModel{}
+	err := BaseService.GetByID(&modelDeliveryInfo, id, "MailSenders", "MasterSign")
+	if err != nil {
+		return nil, err
+	}
+
+	return &modelDeliveryInfo, nil
 }

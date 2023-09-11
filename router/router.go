@@ -64,6 +64,10 @@ func GetRouter() *gin.Engine {
 	router.GET("call/users", call.Users)
 	// メール配信一覧数据
 	router.GET("delivery/data", delivery.Data)
+	// メール配信详情页面
+	router.GET("delivery/view", delivery.View)
+	// メール配信详情页面数据
+	router.POST("delivery/read/:id", delivery.Read)
 
 	router.GET("/menu", index.Menu)
 
@@ -86,5 +90,6 @@ func createRender() multitemplate.Renderer {
 	tmpl.AddFromFiles("call/edit", "templates/base/iframe.tmpl", "templates/call/edit.tmpl")
 	tmpl.AddFromFiles("call/users", "templates/base/iframe.tmpl", "templates/call/users.tmpl")
 	tmpl.AddFromFiles("delivery/index", "templates/base/layout.tmpl", "templates/delivery/index.tmpl")
+	tmpl.AddFromFiles("delivery/view", "templates/base/iframe.tmpl", "templates/delivery/view.tmpl")
 	return tmpl
 }

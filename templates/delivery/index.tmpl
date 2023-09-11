@@ -54,10 +54,10 @@
                     field: "status", title: "実施ステータス", templet: function (d) {
                         switch (d.status) {
                             case 1:
-                                return '<span class="layui-badge-dot layui-bg-green"></span> ' + "配信完了"
+                                return '<span class="layui-badge-dot layui-bg-green"></span> ' + d.status_text
                                 break;
                             case 0:
-                                return '<span class="layui-badge-dot"></span> ' + "未実施"
+                                return '<span class="layui-badge-dot"></span> ' + d.status_text
                                 break;
                             default:
                                 break;
@@ -70,12 +70,24 @@
         });
 
         table.on("tool(delivery-table)", function (obj) {
+            let data = obj.data;
             console.log(obj);
-            switch (obj.evnet) {
+            switch (obj.event) {
                 case "view":
-                    
+                    let viewObj = {
+                        id: data.id
+                    };
+                    let viewStr = $.param(viewObj);
+                    layer.open({
+                        type: 2,
+                        title: '编辑',
+                        shadeClose: true,
+                        maxmin: true, // 开启最大化最小化按钮
+                        area: ['800px', '650px'],
+                        content: "/delivery/view?" + viewStr
+                    });
                     break;
-            
+
                 default:
                     break;
             }

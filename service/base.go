@@ -113,8 +113,8 @@ func (s *sBaseService) GetDistinct(out interface{}, column interface{}) error {
 //	@param out
 //	@param id
 //	@return error
-func (s *sBaseService) GetByID(out interface{}, id uint) error {
-	return db.Limit(1).Where("id = ?", id).Find(out).Error
+func (s *sBaseService) GetByID(out interface{}, id uint, preload ...string) error {
+	return db.Scopes(s.Preload(preload...)).Limit(1).Where("id = ?", id).Find(out).Error
 }
 
 // GetByIDUnscoped 根据ID获取（不带deleted_at）

@@ -1,0 +1,172 @@
+{{ define "css" }}
+<style>
+    .layui-input-prefix {
+        width: 180px;
+        padding: 0;
+    }
+
+    .layui-input-wrap .layui-input {
+        padding-left: 180px !important;
+    }
+
+    .layui-input-inline {
+        padding-left: 100px;
+    }
+</style>
+{{ end }}
+
+{{ define "content" }}
+<div class="layui-row layui-card">
+    <div class="layui-card-body">
+        <form class="layui-form layui-form-pane layui-col-space15" lay-filter="delivery-form">
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        番号
+                    </div>
+                    <input type="text" name="id" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        管理名称
+                    </div>
+                    <input type="text" name="name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        メールタイトル
+                    </div>
+                    <input type="text" name="title" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        送信元
+                    </div>
+                    <input type="text" name="sender_name" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        送信日時
+                    </div>
+                    <input type="text" name="send_at" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        カテゴリー
+                    </div>
+                    <input type="text" name="summary_category_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        即時フラグ
+                    </div>
+                    <input type="text" name="flag_immediate_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        メール内容確認済
+                    </div>
+                    <input type="text" name="mail_content_confirm_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        配信先確認済
+                    </div>
+                    <input type="text" name="mail_address_confirm_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        メール本文
+                    </div>
+                    <input type="text" name="content" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        署名内容
+                    </div>
+                    <input type="text" name="sign" value="" class="layui-input" disabled>
+                </div>
+            </div>
+            <div class="layui-col-md12">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        実施ステータス
+                    </div>
+                    <input type="text" name="status_text" value="" class="layui-input" disabled>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{{ end }}
+
+{{ define "js" }}
+<script>
+    // 获取所有参数
+    function getUrlParamAll() {
+        let queryString = window.location.search.slice(1);
+        let paramsArray = queryString.split("&");
+        let params = {};
+
+        paramsArray.forEach(param => {
+            let [key, value] = param.split("=");
+            params[key] = decodeURIComponent(value);
+        });
+
+        return params
+    }
+    var paramInfo = getUrlParamAll();
+    console.log(paramInfo);
+
+    layui.use(function () {
+        var $ = layui.$
+            , form = layui.form;
+
+        $.ajax({
+            url: "/delivery/read/" + paramInfo.id
+            , type: "post"
+        })
+            .done(function (res) {
+                res.data.sender_name = res.data.mail_senders.name + "<" + res.data.mail_senders.email + ">";
+                if (res.data.flag_immediate == 1) {
+                    res.data.flag_immediate_text = "OK";
+                } else {
+                    res.data.flag_immediate_text = "NG";
+                }
+                if (res.data.mail_content_confirm == 1) {
+                    res.data.mail_content_confirm_text = "OK";
+                } else {
+                    res.data.mail_content_confirm_text = "NG";
+                }
+                if (res.data.mail_address_confirm == 1) {
+                    res.data.mail_address_confirm_text = "OK";
+                } else {
+                    res.data.mail_address_confirm_text = "NG";
+                }
+                res.data.sign = res.data.master_sign.content;
+                form.val("delivery-form", res.data);
+                console.log(res);
+            })
+    })
+</script>
+{{ end }}
