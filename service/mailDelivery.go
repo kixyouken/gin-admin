@@ -41,6 +41,7 @@ func (s *sMailDeliveryService) DeliveryInfo(in model.MailDeliveryModel) (out par
 	}
 
 	out.MailDeliveryLogs = MailDeliveryLogsService.MailDeliveryLogsList(in.MailDeliveryLogs)
+	out.MailDeliveryTargets = MailDeliveryTargetsService.DeliveryTargetsList(in.MailDeliveryTargets)
 
 	return out
 }
@@ -55,7 +56,7 @@ func (s *sMailDeliveryService) DeliveryList(in []model.MailDeliveryModel) (out [
 }
 
 func (s *sMailDeliveryService) GetAllDelivery(c *gin.Context, search func(db *gorm.DB) *gorm.DB, order string) ([]model.MailDeliveryModel, error) {
-	err := BaseService.GetPagePreload(c, &modelDeliveryList, search, "*", order, "MailDeliveryLogs.Unscoped")
+	err := BaseService.GetPagePreload(c, &modelDeliveryList, search, "*", order, "MailDeliveryLogs.Unscoped", "MailDeliveryTargets.Unscoped")
 	if err != nil {
 		return nil, err
 	}

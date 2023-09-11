@@ -15,6 +15,13 @@
 {{ end }}
 
 {{ define "js" }}
+<script type="text/html" id="delivery-tool">
+    <div class="layui-clear-space">
+        <a class="layui-btn layui-btn-xs" lay-event="view">詳細</a>
+        <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="delivery-view">対象一覧</a>
+    </div>
+</script>
+
 <script>
     layui.use(function () {
         var $ = layui.$
@@ -33,10 +40,14 @@
                         if (d.mail_delivery_logs) {
                             mail_delivery_logs = d.mail_delivery_logs.length;
                         }
-                        return mail_delivery_logs;
+                        let mail_delivery_targets = 0;
+                        if (d.mail_delivery_targets) {
+                            mail_delivery_targets = d.mail_delivery_targets.length;
+                        }
+                        return mail_delivery_logs + "/" + mail_delivery_targets;
                     }
                 }
-                , { field: "", title: "対象者リスト" }
+                // , { field: "", title: "対象者リスト" }
                 , { field: "send_at", title: "送信日時" }
                 , { field: "send_completed_at", title: "送信完了日時" }
                 , {
@@ -53,9 +64,22 @@
                         }
                     }
                 }
+                , { toolbar: "#delivery-tool", title: "操作", width: 130 }
             ]]
             , page: true
         });
+
+        table.on("tool(delivery-table)", function (obj) {
+            console.log(obj);
+            switch (obj.evnet) {
+                case "view":
+                    
+                    break;
+            
+                default:
+                    break;
+            }
+        })
     })
 </script>
 {{ end }}
