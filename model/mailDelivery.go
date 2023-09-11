@@ -24,6 +24,7 @@ type MailDeliveryModel struct {
 	SummaryTargetID    int
 	MailConfirmBy      int
 	MailConfirmAt      time.Time
+	MailDeliveryLogs   []MailDeliveryLogsModel `gorm:"foreignKey:MailDeliveryID;references:ID"`
 }
 
 func (MailDeliveryModel) TableName() string {

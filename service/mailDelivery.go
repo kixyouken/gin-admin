@@ -40,6 +40,8 @@ func (s *sMailDeliveryService) DeliveryInfo(in model.MailDeliveryModel) (out par
 		out.DeletedAt = in.DeletedAt.Time.Format(format.YMDHI)
 	}
 
+	out.MailDeliveryLogs = MailDeliveryLogsService.MailDeliveryLogsList(in.MailDeliveryLogs)
+
 	return out
 }
 
@@ -53,7 +55,7 @@ func (s *sMailDeliveryService) DeliveryList(in []model.MailDeliveryModel) (out [
 }
 
 func (s *sMailDeliveryService) GetAllDelivery(c *gin.Context, search func(db *gorm.DB) *gorm.DB, order string) ([]model.MailDeliveryModel, error) {
-	err := BaseService.GetPage(c, &modelDeliveryList, search, "*", order)
+	err := BaseService.GetPagePreload(c, &modelDeliveryList, search, "*", order, "MailDeliveryLogs")
 	if err != nil {
 		return nil, err
 	}
